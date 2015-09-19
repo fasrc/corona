@@ -1,27 +1,40 @@
 # DockerNebula
 
+DockerNebula is a containerized OpenNebula deployment.  The primary goal is to build a OpenNebula deployment which can easily be rolled out or rolled back.  At the moment the plan is to split the services into 3 containers libvirt, onenode, and oneserver.
+
+##Requirements
+
+The newest version of docker is suggest although this is tested with docker 1.8.2.  The newest version can be installed using:
+
+```
+curl -sSL https://get.docker.io | bash
+```
+
+##Compose
+
+Compose deployment requires docker-compose.  Download using:
+
+```
+pip install -U docker-compose
+```
+
+To start libvirt run
+
+```
+docker-compose -f compose/one-compute.yml up
+```
+
+##Manual
+#### Libvirt
+
 To start libvirt manually run
 
 ```
 docker run --rm --privileged=true -ti -v /var/run:/var/run -v /dev:/dev --net=host -v /sys/fs/cgroup:/sys/fs/cgroup --pid=host --name=libvirt dockernebula/libvirt
 ```
 
-A libvirt example is
+If libvirt client is not installed on the host.  Libvirt container testing can be done with the below command.
 
 ```
 docker exec -ti [Container ID] virsh list
-```
-
-###Testing Documentation
-
-Make sure /dev/pts/ptmx is 666.  Some investigation on why this happens is needed
-
-```
-mkdir -p /var/lib/libvirt/images
-
-docker run --rm --privileged=true -ti -v /var/run:/var/run -v /dev:/dev --net=host -v /sys/fs/cgroup:/sys/fs/cgroup -v /var/lib/libvirt/images:/var/lib/libvirt/images --pid=host --name=libvirt dockernebula/libvirt
-
-curl -o /var/lib/libvirt/images/fedora.qcow2 http://fedora.osuosl.org/linux/releases/20/Images/x86_64/Fedora-x86_64-20-20131211.1-sda.qcow2
-
-virt-install --connect qemu:///system -r 1024 --accelerate -n Fedora -f /var/lib/libvirt/images/guest.img --cdrom /var/lib/libvirt/images/Fed22.iso --noautoconsole --virt-type kvm --vnc --console pty,target_type=virtio
 ```
