@@ -11,7 +11,7 @@ Make sure /dev/pts/ptmx is 666.  Some investigation on why this happens is neede
 ```
 mkdir -p /var/lib/libvirt/images
 
-docker run --rm --privileged=true -ti -v /var/run:/var/run -v /dev:/dev --net=host -v /sys/fs/cgroup:/sys/fs/cgroup -v /var/lib/libvirt/images:/var/lib/libvirt/images --pid=host --name=libvirt dockernebula/libvirt
+docker run --rm --privileged=true -ti -v /var/run:/var/run -v /dev:/dev --net=host -v /sys/fs/cgroup:/sys/fs/cgroup -v /var/libvirt/images:/var/lib/libvirt/images -v /lib/modules:/lib/modules:ro --pid=host --name=libvirt dockernebula/libvirt
 
 dd if=/dev/zero of=/var/lib/libvirt/images/guest.img bs=1M count=8192
 
