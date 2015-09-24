@@ -1,6 +1,6 @@
-# DockerNebula
+# CORONA
 
-DockerNebula is a containerized OpenNebula deployment.  The primary goal is to build a OpenNebula deployment which can easily be rolled out or rolled back.  At the moment the plan is to split the services into 3 containers libvirt, onenode, and oneserver.
+corona is a containerized OpenNebula deployment.  The primary goal is to build a OpenNebula deployment which can easily be rolled out or rolled back.  At the moment the plan is to split the services into 3 containers libvirt, onenode, and oneserver.
 
 ##Requirements
 
@@ -30,7 +30,7 @@ docker-compose -f compose/one-compute.yml up
 To start libvirt manually run
 
 ```
-docker run --rm --privileged=true -ti -v /var/run:/var/run -v /dev:/dev --net=host -v /sys/fs/cgroup:/sys/fs/cgroup --pid=host --name=libvirt dockernebula/libvirt
+docker run --rm --privileged=true -ti -v /var/run:/var/run -v /dev:/dev --net=host -v /sys/fs/cgroup:/sys/fs/cgroup --pid=host --name=libvirt corona/libvirt
 ```
 
 If libvirt client is not installed on the host.  Libvirt container testing can be done with the below command.
