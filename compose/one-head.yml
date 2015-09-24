@@ -1,0 +1,11 @@
+one-compute:
+    image: corona/base:latest
+    name: one-compute
+
+one-head:
+    image: corona/one-head:latest
+    name: one-head
+    net: host
+    pid: host
+    privileged: true
+    restart: always
