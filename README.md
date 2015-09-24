@@ -1,6 +1,7 @@
 # CORONA
+###### Disclaimer: This is a completely experimental project.  We are still at the very early stages of developing CORONA
 
-corona is a containerized OpenNebula deployment.  The primary goal is to build a OpenNebula deployment which can easily be rolled out or rolled back.  At the moment the plan is to split the services into 3 containers libvirt, onenode, and oneserver.
+CORONA is a containerized OpenNebula deployment.  The primary goal is to build a OpenNebula deployment which can easily be rolled out or rolled back.  At the moment the plan is to split the services into 3 containers libvirt, onenode, and oneserver.
 
 ##Requirements
 
