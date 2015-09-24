@@ -22,7 +22,7 @@ pip install -U docker-compose
 To start libvirt run
 
 ```
-docker-compose -f compose/one-compute.yml up
+docker-compose -f compose/one-hypervisor.yml up
 ```
 
 ##Manual

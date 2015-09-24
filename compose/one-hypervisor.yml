@@ -16,8 +16,8 @@ libvirt:
      - /lib/modules:/lib/modules:ro
 
 one-node:
-    image: corona/one-node:latest
-    name: one-node
+    image: corona/one-hypervisor:latest
+    name: one-hypervisor
     net: host
     pid: host
     privileged: true
