@@ -1,4 +1,4 @@
-FROM dockernebula/base:latest
+FROM corona/base:latest
 MAINTAINER "Harvard University FAS Research Computing" <rchelp@fas.harvard.edu>
 
 LABEL Description="This is a libvirt image for DockerNebula" Version="0.2"

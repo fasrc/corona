@@ -1,8 +1,6 @@
 FROM centos:7
 MAINTAINER "Harvard University FAS Research Computing" <rchelp@fas.harvard.edu>
 
-ENV DOCKERNEBULA_BASE centos7
-
 LABEL Description="This is a base image for DockerNebula" Version="0.2"
 
 RUN yum -y update && yum clean all
