@@ -1,7 +1,3 @@
-one-compute:
-    image: corona/base:latest
-    name: one-compute
-
 libvirt:
     image: corona/libvirt:latest
     name: libvirt
@@ -15,7 +11,7 @@ libvirt:
      - /dev:/dev
      - /lib/modules:/lib/modules:ro
 
-one-node:
+one-hypervisor:
     image: corona/one-hypervisor:latest
     name: one-hypervisor
     net: host

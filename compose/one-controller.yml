@@ -1,10 +1,6 @@
-one-compute:
-    image: corona/base:latest
-    name: one-compute
-
-one-head:
-    image: corona/one-head:latest
-    name: one-head
+one-controller:
+    image: corona/one-controller:latest
+    name: one-controller
     net: host
     pid: host
     privileged: true
