@@ -5,3 +5,14 @@ one-controller:
     pid: host
     privileged: true
     restart: always
+
+one-nfs:
+    image: corona/nfs
+    name: one-nfs
+    net: host
+    pid: host
+    privileged: true
+    restart: always
+    volumes:
+     - /opt/corona/nfs/nfs_export:/etc/exports:ro
+     - /opt/corona/supervisord/supervisord.conf:/etc/supervisord.conf:ro

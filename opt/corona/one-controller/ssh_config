@@ -1,0 +1,5 @@
+## Congfigure sshd to remove host checking for oneadmin
+
+Host *
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
