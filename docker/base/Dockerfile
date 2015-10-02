@@ -25,4 +25,4 @@ RUN yum -y install \
 
 COPY one-centos7.repo /etc/yum.repos.d/
 
-COPY supervisord.conf /etc/supervisord.conf
+COPY supervisord/supervisord.conf /etc/supervisord.conf

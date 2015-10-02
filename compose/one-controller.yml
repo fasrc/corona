@@ -15,4 +15,3 @@ one-nfs:
     restart: always
     volumes:
      - /opt/corona/nfs/nfs_export:/etc/exports:ro
-     - /opt/corona/supervisord/supervisord.conf:/etc/supervisord.conf:ro
