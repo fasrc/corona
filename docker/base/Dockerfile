@@ -23,6 +23,9 @@ RUN yum -y install \
         sqlite-devel \
         && yum clean all 
 
+RUN groupadd --gid 9869 oneadmin
+RUN useradd --uid 9869 -g oneadmin -d /var/lib/one oneadmin
+
 COPY one-centos7.repo /etc/yum.repos.d/
 
 COPY supervisord/supervisord.conf /etc/supervisord.conf
