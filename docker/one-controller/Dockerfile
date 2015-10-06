@@ -29,3 +29,7 @@ RUN gem install --no-ri --no-rdoc \
     ox mysql \
     softlayer_api \
     configparser azure
+
+COPY supervisord/one-controller.conf /etc/supervisor.d/one-controller.conf
+
+CMD ["/usr/bin/supervisord"]
