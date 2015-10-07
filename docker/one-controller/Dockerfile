@@ -30,6 +30,8 @@ RUN gem install --no-ri --no-rdoc \
     softlayer_api \
     configparser azure
 
+VOLUME /var/lib/one
+
 COPY supervisord/one-controller.conf /etc/supervisor.d/one-controller.conf
 
 CMD ["/usr/bin/supervisord"]

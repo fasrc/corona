@@ -1,0 +1,50 @@
+one-controller:
+    image: corona/one-controller:latest
+    name: one-controller
+    net: host
+    pid: host
+    restart: always
+    command: /usr/bin/supervisord
+
+one-nfs:
+    image: corona/nfs:latest
+    name: one-nfs
+    net: host
+    pid: host
+    privileged: true
+    restart: always
+    volumes:
+     - /opt/corona/nfs/nfs_export:/etc/exports:ro
+    volumes_from:
+     - one-controller
+    command: /usr/bin/supervisord
+
+libvirt:
+    image: corona/libvirt:latest
+    name: libvirt
+    net: host
+    pid: host
+    privileged: true
+    restart: always
+    volumes:
+     - /run:/run
+     - /sys/fs/cgroup:/sys/fs/cgroup
+     - /dev:/dev
+     - /lib/modules:/lib/modules:ro
+    volumes_from:
+     - one-controller
+    command: /usr/sbin/libvirtd
+
+one-hypervisor:
+    image: corona/one-hypervisor:latest
+    name: one-hypervisor
+    net: host
+    pid: host
+    restart: always
+    volumes:
+     - /run:/run
+     - /sys/fs/cgroup:/sys/fs/cgroup
+     - /dev:/dev
+    volumes_from:
+     - one-controller
+    command: /usr/bin/supervisord
