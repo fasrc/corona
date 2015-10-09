@@ -2,4 +2,5 @@
 
 Host *
     StrictHostKeyChecking no
+    Port 3960
     UserKnownHostsFile /dev/null

@@ -9,6 +9,7 @@ RUN yum -y install \
     openssh-server \
     && yum clean all
 
-COPY start.sh /root/
+COPY supervisord/one-hypervisor.conf /etc/supervisor.d/one-hypervisor.conf
+COPY start.sh /root/start.sh
 
 CMD ["/root/start.sh"]

@@ -4,6 +4,8 @@ one-controller:
     net: host
     pid: host
     restart: always
+    volumes:
+     - /opt/corona/one-controller/ssh_config:/var/lib/one/.ssh/config:ro
     command: /usr/bin/supervisord
 
 one-nfs:
@@ -31,6 +33,9 @@ libvirt:
      - /sys/fs/cgroup:/sys/fs/cgroup
      - /dev:/dev
      - /lib/modules:/lib/modules:ro
+     - /opt/corona/libvirt/libvirt.conf:/etc/libvirt/libvirt.conf:ro
+     - /opt/corona/libvirt/libvirtd.conf:/etc/libvirt/libvirtd.conf:ro
+     - /opt/corona/libvirt/qemu.conf:/etc/libvirt/qemu.conf:ro
     volumes_from:
      - one-controller
     command: /usr/sbin/libvirtd
@@ -45,6 +50,7 @@ one-hypervisor:
      - /run:/run
      - /sys/fs/cgroup:/sys/fs/cgroup
      - /dev:/dev
+     - /opt/corona/one-hypervisor/sshd.conf:/etc/ssh/sshd_config:ro
     volumes_from:
      - one-controller
-    command: /usr/bin/supervisord
+    command: /root/start.sh
