@@ -1,5 +1,5 @@
 libvirt:
-    image: corona/libvirt:latest
+    image: fasrc/corona-libvirt:latest
     name: libvirt
     net: host
     pid: host
@@ -10,15 +10,24 @@ libvirt:
      - /sys/fs/cgroup:/sys/fs/cgroup
      - /dev:/dev
      - /lib/modules:/lib/modules:ro
+     - /opt/corona/libvirt/libvirt.conf:/etc/libvirt/libvirt.conf:ro
+     - /opt/corona/libvirt/libvirtd.conf:/etc/libvirt/libvirtd.conf:ro
+     - /opt/corona/libvirt/qemu.conf:/etc/libvirt/qemu.conf:ro
+    volumes_from:
+     - one-controller
+    command: /usr/sbin/libvirtd
 
 one-hypervisor:
-    image: corona/one-hypervisor:latest
+    image: fasrc/corona-hypervisor:latest
     name: one-hypervisor
     net: host
     pid: host
-    privileged: true
     restart: always
     volumes:
      - /run:/run
      - /sys/fs/cgroup:/sys/fs/cgroup
      - /dev:/dev
+     - /opt/corona/one-hypervisor/sshd.conf:/etc/ssh/sshd_config:ro
+    volumes_from:
+     - one-controller
+    command: /root/start.sh

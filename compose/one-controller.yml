@@ -1,13 +1,15 @@
 one-controller:
-    image: corona/one-controller:latest
+    image: fasrc/corona-controller:latest
     name: one-controller
     net: host
     pid: host
-    privileged: true
     restart: always
+    volumes:
+     - /opt/corona/one-controller/ssh_config:/var/lib/one/.ssh/config:ro
+    command: /usr/bin/supervisord
 
 one-nfs:
-    image: corona/nfs
+    image: fasrc/corona-nfs:latest
     name: one-nfs
     net: host
     pid: host
@@ -15,3 +17,6 @@ one-nfs:
     restart: always
     volumes:
      - /opt/corona/nfs/nfs_export:/etc/exports:ro
+    volumes_from:
+     - one-controller
+    command: /usr/bin/supervisord
