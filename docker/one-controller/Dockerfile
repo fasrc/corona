@@ -30,8 +30,13 @@ RUN gem install --no-ri --no-rdoc \
     softlayer_api \
     configparser azure
 
+RUN rm /var/lib/one/.one/one_auth ;\
+    rm /var/lib/one/.ssh/*
+
 VOLUME /var/lib/one
 
 COPY supervisord/one-controller.conf /etc/supervisor.d/one-controller.conf
+COPY start.sh /root/start.sh
+COPY one-auth.sh /tmp/one-auth.sh
 
-CMD ["/usr/bin/supervisord"]
+CMD ["/root/start.sh"]
