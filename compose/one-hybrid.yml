@@ -1,5 +1,5 @@
 one-controller:
-    image: fasrc/corona-controller:latest
+    image: fasrc/corona-controller:4.12
     name: one-controller
     net: host
     pid: host
@@ -9,7 +9,7 @@ one-controller:
     command: /root/start.sh
 
 one-nfs:
-    image: fasrc/corona-nfs:latest
+    image: fasrc/corona-nfs:4.12
     name: one-nfs
     net: host
     pid: host
@@ -22,7 +22,7 @@ one-nfs:
     command: /usr/bin/supervisord
 
 libvirt:
-    image: fasrc/corona-libvirt:latest
+    image: fasrc/corona-libvirt:4.12
     name: libvirt
     net: host
     pid: host
@@ -41,7 +41,7 @@ libvirt:
     command: /usr/sbin/libvirtd
 
 one-hypervisor:
-    image: fasrc/corona-hypervisor:latest
+    image: fasrc/corona-hypervisor:4.12
     name: one-hypervisor
     net: host
     pid: host

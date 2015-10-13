@@ -1,5 +1,5 @@
 one-controller:
-    image: fasrc/corona-controller:latest
+    image: fasrc/corona-controller:4.12
     name: one-controller
     net: host
     pid: host
@@ -9,7 +9,7 @@ one-controller:
     command: /usr/bin/supervisord
 
 one-nfs:
-    image: fasrc/corona-nfs:latest
+    image: fasrc/corona-nfs:4.12
     name: one-nfs
     net: host
     pid: host
