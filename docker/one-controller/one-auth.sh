@@ -16,5 +16,5 @@ if [ -f /var/lib/one/.ssh/id_dsa ]; then
     else
         ssh-keygen -t dsa -f ~/.ssh/id_dsa -N ''
         
-        cat id_dsa.pub > authorized_keys
+        cat ~/.ssh/id_dsa.pub > ~/.ssh/authorized_keys
 fi
