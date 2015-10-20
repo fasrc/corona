@@ -1,7 +1,7 @@
 FROM centos:7
 MAINTAINER "Harvard University FAS Research Computing" <rchelp@fas.harvard.edu>
 
-LABEL Description="This is a base image for corona" Version="0.2"
+LABEL Description="This is a base image for corona"
 
 RUN yum -y update && yum clean all
 RUN rpm -e --nodeps systemd-container systemd-container-libs; \

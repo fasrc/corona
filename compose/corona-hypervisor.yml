@@ -1,6 +1,6 @@
-one-nfs:
+nfs:
     image: fasrc/corona-nfs:4.12
-    name: one-nfs
+    name: corona-nfs
     net: host
     pid: host
     privileged: true
@@ -12,7 +12,7 @@ one-nfs:
 
 one-hypervisor:
     image: fasrc/corona-hypervisor:4.12
-    name: one-hypervisor
+    name: corona-hypervisor
     net: host
     pid: host
     restart: always
@@ -27,7 +27,7 @@ one-hypervisor:
 
 libvirt:
     image: fasrc/corona-libvirt:4.12
-    name: libvirt
+    name: corona-libvirt
     net: host
     pid: host
     privileged: true

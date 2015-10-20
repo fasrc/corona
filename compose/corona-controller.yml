@@ -1,6 +1,6 @@
 one-controller:
     image: fasrc/corona-controller:4.12
-    name: one-controller
+    name: corona-controller
     net: host
     pid: host
     restart: always
@@ -8,9 +8,9 @@ one-controller:
      - /opt/corona/one-controller/ssh_config:/var/lib/one/.ssh/config:ro
     command: /usr/bin/supervisord
 
-one-nfs:
+nfs:
     image: fasrc/corona-nfs:4.12
-    name: one-nfs
+    name: corona-nfs
     net: host
     pid: host
     privileged: true

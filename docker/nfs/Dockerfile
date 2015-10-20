@@ -1,7 +1,7 @@
 FROM fasrc/corona-base:4.12
 MAINTAINER "Harvard University FAS Research Computing" <rchelp@fas.harvard.edu>
 
-LABEL Description="This is a nfs image for corona" Version="0.2"
+LABEL Description="This is a nfs image for corona"
 
 RUN yum -y update && yum clean all
 RUN yum -y install \
