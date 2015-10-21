@@ -1,6 +1,5 @@
-one-controller:
+controller:
     image: fasrc/corona-controller:4.12
-    name: corona-controller
     net: host
     pid: host
     restart: always
@@ -10,7 +9,6 @@ one-controller:
 
 nfs:
     image: fasrc/corona-nfs:4.12
-    name: corona-nfs
     net: host
     pid: host
     privileged: true
@@ -18,12 +16,11 @@ nfs:
     volumes:
      - /opt/corona/nfs/nfs_export:/etc/exports:ro
     volumes_from:
-     - one-controller
+     - controller
     command: /usr/bin/supervisord
 
 libvirt:
     image: fasrc/corona-libvirt:4.12
-    name: corona-libvirt
     net: host
     pid: host
     privileged: true
@@ -37,12 +34,11 @@ libvirt:
      - /opt/corona/libvirt/libvirtd.conf:/etc/libvirt/libvirtd.conf:ro
      - /opt/corona/libvirt/qemu.conf:/etc/libvirt/qemu.conf:ro
     volumes_from:
-     - one-controller
+     - controller
     command: /usr/bin/supervisord
 
-one-hypervisor:
+hypervisor:
     image: fasrc/corona-hypervisor:4.12
-    name: corona-hypervisor
     net: host
     pid: host
     restart: always
@@ -52,5 +48,5 @@ one-hypervisor:
      - /dev:/dev
      - /opt/corona/one-hypervisor/sshd.conf:/etc/ssh/sshd_config:ro
     volumes_from:
-     - one-controller
+     - controller
     command: /root/start.sh

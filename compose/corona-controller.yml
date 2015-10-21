@@ -1,6 +1,5 @@
-one-controller:
+controller:
     image: fasrc/corona-controller:4.12
-    name: corona-controller
     net: host
     pid: host
     restart: always
@@ -10,7 +9,6 @@ one-controller:
 
 nfs:
     image: fasrc/corona-nfs:4.12
-    name: corona-nfs
     net: host
     pid: host
     privileged: true
@@ -18,5 +16,5 @@ nfs:
     volumes:
      - /opt/corona/nfs/nfs_export:/etc/exports:ro
     volumes_from:
-     - one-controller
+     - controller
     command: /usr/bin/supervisord

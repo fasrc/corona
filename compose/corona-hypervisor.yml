@@ -1,6 +1,5 @@
 nfs:
     image: fasrc/corona-nfs:4.12
-    name: corona-nfs
     net: host
     pid: host
     privileged: true
@@ -10,9 +9,8 @@ nfs:
      - /opt/corona/nfs/append_fstab.sh:/root/append_fstab.sh
     command: /root/nfs_mount.sh
 
-one-hypervisor:
+hypervisor:
     image: fasrc/corona-hypervisor:4.12
-    name: corona-hypervisor
     net: host
     pid: host
     restart: always
@@ -22,12 +20,11 @@ one-hypervisor:
      - /dev:/dev
      - /opt/corona/one-hypervisor/sshd.conf:/etc/ssh/sshd_config:ro
     volumes_from:
-     - one-nfs
+     - nfs
     command: /root/start.sh
 
 libvirt:
     image: fasrc/corona-libvirt:4.12
-    name: corona-libvirt
     net: host
     pid: host
     privileged: true
@@ -41,5 +38,5 @@ libvirt:
      - /opt/corona/libvirt/libvirtd.conf:/etc/libvirt/libvirtd.conf:ro
      - /opt/corona/libvirt/qemu.conf:/etc/libvirt/qemu.conf:ro
     volumes_from:
-     - one-nfs
+     - nfs
     command: /usr/bin/supervisord
