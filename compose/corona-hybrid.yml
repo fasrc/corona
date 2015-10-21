@@ -38,7 +38,7 @@ libvirt:
      - /opt/corona/libvirt/qemu.conf:/etc/libvirt/qemu.conf:ro
     volumes_from:
      - one-controller
-    command: /usr/sbin/libvirtd
+    command: /usr/bin/supervisord
 
 one-hypervisor:
     image: fasrc/corona-hypervisor:4.12

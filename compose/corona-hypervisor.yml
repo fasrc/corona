@@ -42,4 +42,4 @@ libvirt:
      - /opt/corona/libvirt/qemu.conf:/etc/libvirt/qemu.conf:ro
     volumes_from:
      - one-nfs
-    command: /usr/sbin/libvirtd
+    command: /usr/bin/supervisord
