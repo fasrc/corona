@@ -5,7 +5,7 @@ controller:
     restart: always
     volumes:
      - /opt/corona/one-controller/ssh_config:/var/lib/one/.ssh/config:ro
-    command: /usr/bin/supervisord
+    command: /root/start.sh
 
 nfs:
     image: fasrc/corona-nfs:4.12
@@ -17,4 +17,4 @@ nfs:
      - /opt/corona/nfs/nfs_export:/etc/exports:ro
     volumes_from:
      - controller
-    command: /usr/bin/supervisord
+    command: /root/start.sh

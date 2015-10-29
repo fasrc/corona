@@ -8,7 +8,8 @@ RUN yum -y install \
     nfs-utils \
     nfs-utils-lib
 
-COPY nfs_start.sh /usr/sbin/nfs_start
+COPY supervisord/nfs_start.sh /usr/sbin/nfs_start
 COPY supervisord/nfs_server.conf /etc/supervisor.d/nfs_server.conf
+COPY start.sh /root/start.sh
 
-CMD ["/usr/bin/supervisord"]
+CMD ["/root/start.sh"]

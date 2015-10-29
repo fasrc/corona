@@ -1,13 +1,11 @@
 #!/bin/bash
 set -o errexit
 
-/usr/sbin/sshd-keygen
-
 # Start supervisord
 /usr/bin/supervisord
 
 # Start supervisor programs
-/usr/bin/supervisorctl start one-hypervisor
+/usr/bin/supervisorctl start nfs-server
 
 # Tail the logs to keep supervisor writing to stdout
 tail -f /tmp/supervisord.log

@@ -10,6 +10,7 @@ RUN yum -y install \
     qemu-kvm \
     && yum clean all
 
-COPY supervisord/libvirt.conf /etc/supervisor.d/libvirt.conf
+COPY supervisord/libvirtd.conf /etc/supervisor.d/libvirtd.conf
+COPY start.sh /root/start.sh
 
-CMD ["/usr/bin/supervisord"]
+CMD ["/root/start.sh"]

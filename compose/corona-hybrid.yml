@@ -17,7 +17,7 @@ nfs:
      - /opt/corona/nfs/nfs_export:/etc/exports:ro
     volumes_from:
      - controller
-    command: /usr/bin/supervisord
+    command: /root/start.sh
 
 libvirt:
     image: fasrc/corona-libvirt:4.12
@@ -35,7 +35,7 @@ libvirt:
      - /opt/corona/libvirt/qemu.conf:/etc/libvirt/qemu.conf:ro
     volumes_from:
      - controller
-    command: /usr/bin/supervisord
+    command: /root/start.sh
 
 hypervisor:
     image: fasrc/corona-hypervisor:4.12

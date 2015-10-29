@@ -7,7 +7,7 @@ nfs:
     volumes:
      - /one
      - /opt/corona/nfs/append_fstab.sh:/root/append_fstab.sh
-    command: /root/nfs_mount.sh
+    command: /root/start.sh
 
 hypervisor:
     image: fasrc/corona-hypervisor:4.12
@@ -39,4 +39,4 @@ libvirt:
      - /opt/corona/libvirt/qemu.conf:/etc/libvirt/qemu.conf:ro
     volumes_from:
      - nfs
-    command: /usr/bin/supervisord
+    command: /root/start.sh
