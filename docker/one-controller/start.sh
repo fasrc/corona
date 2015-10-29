@@ -8,7 +8,8 @@ rm /tmp/one-auth.sh
 /usr/bin/supervisord
 
 # Start supervisor programs
-/usr/bin/supervisorctl start one-controller
+/usr/bin/supervisorctl start opennebula
+/usr/bin/supervisorctl start opennebula-scheduler
 
 # Tail the logs to keep supervisor writing to stdout
 tail -f /tmp/supervisord.log
