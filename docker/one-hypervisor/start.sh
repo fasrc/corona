@@ -7,7 +7,7 @@ set -o errexit
 /usr/bin/supervisord
 
 # Start supervisor programs
-/usr/bin/supervisorctl start one-hypervisor
+/usr/bin/supervisorctl start sshd
 
 # Tail the logs to keep supervisor writing to stdout
 tail -f /tmp/supervisord.log
