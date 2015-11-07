@@ -50,3 +50,13 @@ hypervisor:
     volumes_from:
      - controller
     command: /root/start.sh
+
+sunstone:
+    image: fasrc/corona-sunstone:4.12
+    net: host
+    pid: host
+    privileged: true
+    restart: always
+    volumes_from:
+     - controller
+    command: /root/start.sh

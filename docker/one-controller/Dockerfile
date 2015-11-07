@@ -7,7 +7,6 @@ RUN yum -y update && yum clean all
 RUN yum -y install \
     opennebula-server \
     opennebula-flow \
-    opennebula-sunstone \
     && yum clean all
 
 RUN gem install --no-ri --no-rdoc aws-sdk --version "= 1.33"

@@ -21,6 +21,7 @@ RUN yum -y install \
         mariadb-devel \
         ruby-devel \
         sqlite-devel \
+        make \
         && yum clean all 
 
 RUN groupadd --gid 9869 oneadmin
