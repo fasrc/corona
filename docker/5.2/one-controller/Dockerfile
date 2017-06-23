@@ -1,12 +1,11 @@
 FROM fasrc/corona-base:5.2
 MAINTAINER "Harvard University FAS Research Computing" <rchelp@fas.harvard.edu>
 
-LABEL Description="Controller image for corona"
+LABEL Description="Controller image for CORONA"
 
 RUN yum -y update && yum clean all
 RUN yum -y install \
     opennebula-server \
-    opennebula-flow \
     && yum clean all
 
 RUN printf '1\n\ny\n\n' | /usr/share/one/install_gems
