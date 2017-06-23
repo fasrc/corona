@@ -8,13 +8,7 @@ RUN yum -y install \
     opennebula-sunstone \
     && yum clean all
 
-RUN gem install --no-ri --no-rdoc \
-    rack \
-    sinatra \
-    thin \
-    zendesk_api \
-    sqlite3 \
-    builder \
+RUN printf '1\n\ny\n\n' | /usr/share/one/install_gems
 
 COPY start.sh /root/start.sh
 
