@@ -1,0 +1,5 @@
+[opennebula]
+name=opennebula
+baseurl=http://downloads.opennebula.org/repo/5.2/CentOS/7/x86_64
+enabled=1
+gpgcheck=0
