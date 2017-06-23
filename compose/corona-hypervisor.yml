@@ -1,0 +1,42 @@
+nfs:
+    image: fasrc/corona-nfs:${ONE_VERSION:-4.12}
+    net: host
+    pid: host
+    privileged: true
+    restart: always
+    volumes:
+     - /one
+     - /opt/corona/${ONE_VERSION:-4.12}/nfs/append_fstab.sh:/root/append_fstab.sh
+    command: /root/start.sh
+
+hypervisor:
+    image: fasrc/corona-hypervisor:${ONE_VERSION:-4.12}
+    net: host
+    pid: host
+    restart: always
+    volumes:
+     - /run:/run
+     - /sys/fs/cgroup:/sys/fs/cgroup
+     - /dev:/dev
+     - /opt/corona/${ONE_VERSION:-4.12}/one-hypervisor/sshd.conf:/etc/ssh/sshd_config:ro
+    volumes_from:
+     - nfs
+    command: /root/start.sh
+
+libvirt:
+    image: fasrc/corona-libvirt:${ONE_VERSION:-4.12}
+    net: host
+    pid: host
+    privileged: true
+    restart: always
+    volumes:
+     - /run:/run
+     - /sys/fs/cgroup:/sys/fs/cgroup
+     - /dev:/dev
+     - /lib/modules:/lib/modules:ro
+     - /opt/corona/${ONE_VERSION:-4.12}/libvirt/libvirt.conf:/etc/libvirt/libvirt.conf:ro
+     - /opt/corona/${ONE_VERSION:-4.12}/libvirt/libvirtd.conf:/etc/libvirt/libvirtd.conf:ro
+     - /opt/corona/${ONE_VERSION:-4.12}/libvirt/qemu.conf:/etc/libvirt/qemu.conf:ro
+    volumes_from:
+     - nfs
+    command: /root/start.sh
