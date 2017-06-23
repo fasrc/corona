@@ -22,7 +22,7 @@ pip install -U docker-compose
 
 ####Hybrid
 
-The hybrid deployment is one host which contains both the controller software and a hypervisor.  In this deployment the controller container is lanched first and all other containers mount the controllers `/var/lib/one`.  The nfs container is used the export all of `/var/lib/one/`, although this can be set using the `/opt/corona/nfs/nfs_export` configuration file.  The nfs container is only necessary if other nodes are going to be attached to this deployment.
+The hybrid deployment is one host which contains both the controller software and a hypervisor.  In this deployment the controller container is lanched first and all other containers mount the controllers `/var/lib/one`.  The nfs container is used the export all of `/var/lib/one/`, although this can be set using the `/opt/corona/$ONE_VERSION/nfs/nfs_export` configuration file.  The nfs container is only necessary if other nodes are going to be attached to this deployment.
 
 #####Quick Setup:
 

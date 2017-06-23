@@ -4,7 +4,7 @@ controller:
     pid: host
     restart: always
     volumes:
-     - /opt/corona/one-controller/ssh_config:/var/lib/one/.ssh/config:ro
+     - /opt/corona/4.12/one-controller/ssh_config:/var/lib/one/.ssh/config:ro
     command: /root/start.sh
 
 nfs:
@@ -14,7 +14,7 @@ nfs:
     privileged: true
     restart: always
     volumes:
-     - /opt/corona/nfs/nfs_export:/etc/exports:ro
+     - /opt/corona/4.12/nfs/nfs_export:/etc/exports:ro
     volumes_from:
      - controller
     command: /root/start.sh

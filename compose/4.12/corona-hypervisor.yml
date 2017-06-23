@@ -6,7 +6,7 @@ nfs:
     restart: always
     volumes:
      - /one
-     - /opt/corona/nfs/append_fstab.sh:/root/append_fstab.sh
+     - /opt/corona/4.12/nfs/append_fstab.sh:/root/append_fstab.sh
     command: /root/start.sh
 
 hypervisor:
@@ -18,7 +18,7 @@ hypervisor:
      - /run:/run
      - /sys/fs/cgroup:/sys/fs/cgroup
      - /dev:/dev
-     - /opt/corona/one-hypervisor/sshd.conf:/etc/ssh/sshd_config:ro
+     - /opt/corona/4.12/one-hypervisor/sshd.conf:/etc/ssh/sshd_config:ro
     volumes_from:
      - nfs
     command: /root/start.sh
@@ -34,9 +34,9 @@ libvirt:
      - /sys/fs/cgroup:/sys/fs/cgroup
      - /dev:/dev
      - /lib/modules:/lib/modules:ro
-     - /opt/corona/libvirt/libvirt.conf:/etc/libvirt/libvirt.conf:ro
-     - /opt/corona/libvirt/libvirtd.conf:/etc/libvirt/libvirtd.conf:ro
-     - /opt/corona/libvirt/qemu.conf:/etc/libvirt/qemu.conf:ro
+     - /opt/corona/4.12/libvirt/libvirt.conf:/etc/libvirt/libvirt.conf:ro
+     - /opt/corona/4.12/libvirt/libvirtd.conf:/etc/libvirt/libvirtd.conf:ro
+     - /opt/corona/4.12/libvirt/qemu.conf:/etc/libvirt/qemu.conf:ro
     volumes_from:
      - nfs
     command: /root/start.sh
