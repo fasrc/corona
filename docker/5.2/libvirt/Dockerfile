@@ -3,11 +3,11 @@ MAINTAINER "Harvard University FAS Research Computing" <rchelp@fas.harvard.edu>
 
 LABEL Description="libvirt image for CORONA"
 
-RUN yum -y update && yum clean all
+RUN yum clean all && yum -y update
+RUN yum install -y centos-release-qemu-ev
 RUN yum -y install \
+    qemu-kvm-ev \
     libvirt \
-    qemu-system-x86 \
-    qemu-kvm \
     && yum clean all
 
 COPY supervisord/libvirtd.conf /etc/supervisor.d/libvirtd.conf
