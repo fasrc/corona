@@ -1,4 +1,4 @@
-FROM fasrc/corona-sunstone:5.2
+FROM fasrc/corona-sunstone-base:5.2
 MAINTAINER "Harvard University FAS Research Computing" <rchelp@fas.harvard.edu>
 
 LABEL Description="OneNoVNC image for CORONA"
