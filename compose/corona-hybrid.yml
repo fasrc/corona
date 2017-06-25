@@ -21,9 +21,8 @@ services:
     privileged: true
     restart: always
     volumes:
-      - /opt/corona/${ONE_VERSION:-5.2}/nfs/nfs_export:/etc/exports:ro
-    volumes:
       - controller:/var/lib/one
+      - /opt/corona/${ONE_VERSION:-5.2}/nfs/nfs_export:/etc/exports:ro
     command: /root/start.sh
 
   libvirt:
@@ -33,6 +32,7 @@ services:
     privileged: true
     restart: always
     volumes:
+      - controller:/var/lib/one
       - /run:/run
       - /sys/fs/cgroup:/sys/fs/cgroup
       - /dev:/dev
@@ -40,8 +40,6 @@ services:
       - /opt/corona/${ONE_VERSION:-5.2}/libvirt/libvirt.conf:/etc/libvirt/libvirt.conf:ro
       - /opt/corona/${ONE_VERSION:-5.2}/libvirt/libvirtd.conf:/etc/libvirt/libvirtd.conf:ro
       - /opt/corona/${ONE_VERSION:-5.2}/libvirt/qemu.conf:/etc/libvirt/qemu.conf:ro
-    volumes:
-      - controller:/var/lib/one
     command: /root/start.sh
 
   hypervisor:
@@ -50,12 +48,11 @@ services:
     pid: host
     restart: always
     volumes:
+      - controller:/var/lib/one
       - /run:/run
       - /sys/fs/cgroup:/sys/fs/cgroup
       - /dev:/dev
       - /opt/corona/${ONE_VERSION:-5.2}/one-hypervisor/sshd.conf:/etc/ssh/sshd_config:ro
-    volumes:
-      - controller:/var/lib/one
     command: /root/start.sh
 
   #sunstone:
