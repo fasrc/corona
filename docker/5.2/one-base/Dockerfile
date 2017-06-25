@@ -21,6 +21,3 @@ RUN yum -y install \
     && yum clean all
 
 RUN printf '1\n\ny\n\n' | /usr/share/one/install_gems
-
-RUN groupadd --gid 9869 oneadmin
-RUN useradd --uid 9869 -g oneadmin -d /var/lib/one oneadmin
