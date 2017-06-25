@@ -5,7 +5,7 @@ LABEL Description="Base image for CORONA"
 
 RUN yum clean all && yum -y update
 RUN rpm -e --nodeps systemd-container systemd-container-libs; \
-    yum -d 10 -y install \
+    yum -y install \
         systemd \
         systemd-libs \
         systemd-devel \
