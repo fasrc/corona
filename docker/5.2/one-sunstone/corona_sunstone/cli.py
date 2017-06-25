@@ -2,15 +2,74 @@ import os
 import sys
 
 import jinja2
+from OpenSSL import crypto
 
 from sh import httpd
+
 
 REQUIRED = [
     'SERVER_NAME',
 ]
 
+TEMPLATES = [
+    'sunstone.conf.j2',
+    'http-to-https.conf.j2',
+    'onegate-proxy.conf.j2',
+    'xmlrpc-proxy.conf.j2',
+]
 
-def install_configs():
+CERTS = [
+    ('/etc/pki/tls/certs/xmlrpc_cert.cer', '/etc/pki/tls/private/xmlrpc.key'),
+    ('/etc/pki/tls/certs/web_cert.cer', "/etc/pki/tls/private/web.key"),
+]
+
+
+def get_self_signed_cert(server_name):
+    key = crypto.PKey()
+    key.generate_key(crypto.TYPE_RSA, 2048)
+
+    cert = crypto.X509()
+    cert.get_subject().C = "US"
+    cert.get_subject().ST = "Somestate"
+    cert.get_subject().L = "Somecity"
+    cert.get_subject().O = "Some company"
+    cert.get_subject().OU = "Some organization"
+    cert.get_subject().CN = server_name
+    cert.set_serial_number(1000)
+    cert.gmtime_adj_notBefore(0)
+    cert.gmtime_adj_notAfter(10 * 365 * 24 * 60 * 60)
+    cert.set_issuer(cert.get_subject())
+    cert.set_pubkey(key)
+    cert.sign(key, 'sha256')
+    return cert, key
+
+
+def write_cert(cert, key, cert_dest, key_dest):
+    with open(cert_dest, "wt") as f:
+        f.write(crypto.dump_certificate(crypto.FILETYPE_PEM, cert))
+    with open(key_dest, "wt") as f:
+        f.write(crypto.dump_privatekey(crypto.FILETYPE_PEM, key))
+
+
+def check_certs(ctx):
+    sscert = None
+    for cert, key in CERTS:
+        if not os.path.exists(cert) and not os.path.exists(key):
+            sscert = sscert or get_self_signed_cert(ctx['SERVER_NAME'])
+            write_cert(sscert[0], sscert[1], cert, key)
+
+
+def install_configs(ctx):
+    j2env = jinja2.Environment(loader=jinja2.PackageLoader('corona_sunstone'))
+
+    for template in TEMPLATES:
+        tmpl = j2env.get_template(template)
+        dest = '/etc/httpd/conf.d/{}'.format(template.strip('.j2'))
+        with open(dest, 'w') as f:
+            f.write(tmpl.render(ctx))
+
+
+def get_ctx():
     ctx = {
         'ONEGATE_HOST': 'localhost',
         'ONEGATE_PORT': 5030,
@@ -24,23 +83,11 @@ def install_configs():
             "Missing required environment variable(s):\n\n{}\n".format(missing)
         )
         exit(1)
-
-    j2env = jinja2.Environment(loader=jinja2.PackageLoader('corona_sunstone'))
-
-    templates = [
-        'sunstone.conf.j2',
-        'http-to-https.conf.j2',
-        'onegate-proxy.conf.j2',
-        'xmlrpc-proxy.conf.j2',
-    ]
-
-    for template in templates:
-        tmpl = j2env.get_template(template)
-        dest = '/etc/httpd/conf.d/{}'.format(template.strip('.j2'))
-        with open(dest, 'w') as f:
-            f.write(tmpl.render(ctx))
+    return ctx
 
 
 def main():
-    install_configs()
+    ctx = get_ctx()
+    install_configs(ctx)
+    check_certs(ctx)
     exit(httpd(["-DFOREGROUND"], _fg=True).exit_code)

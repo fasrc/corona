@@ -9,6 +9,7 @@ README = open('README.md').read()
 INSTALL_REQ = [
     'sh>=1.12.11',
     'Jinja2>=2.9.5',
+    'pyOpenSSL>=17.0.0',
 ]
 
 
