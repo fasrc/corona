@@ -5,14 +5,14 @@ LABEL Description="Base image for CORONA"
 
 RUN yum clean all && yum -y update
 RUN rpm -e --nodeps systemd-container systemd-container-libs; \
-RUN yum -d 10 -y install \
-    systemd \
-    systemd-libs \
-    systemd-devel \
-    epel-release \
-    redhat-lsb \
-    python-pip \
-    && yum clean all
+    yum -d 10 -y install \
+        systemd \
+        systemd-libs \
+        systemd-devel \
+        epel-release \
+        redhat-lsb \
+        python-pip \
+        && yum clean all
 
 RUN pip install -IU pip setuptools wheel
 
