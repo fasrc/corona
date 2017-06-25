@@ -11,7 +11,7 @@ RUN rpm -e --nodeps systemd-container systemd-container-libs; \
         systemd-devel \
         epel-release \
         redhat-lsb \
-        python-pip \
+        python2-pip \
         && yum clean all
 
 RUN pip install -IU pip setuptools wheel
