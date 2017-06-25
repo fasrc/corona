@@ -13,7 +13,7 @@ INSTALL_REQ = [
 
 
 PACKAGE_DATA = {
-    'one_sunstone.templates': ['*.j2'],
+    'corona_sunstone.templates': ['*.j2'],
 }
 
 
