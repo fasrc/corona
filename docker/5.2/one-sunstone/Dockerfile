@@ -24,4 +24,4 @@ RUN pip install --no-cache-dir -e /usr/src/app/
 
 EXPOSE 80 443
 
-CMD ["/usr/local/bin/corona-sunstone"]
+CMD ["/usr/bin/corona-sunstone"]
