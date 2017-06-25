@@ -36,9 +36,9 @@ def install_configs():
 
     for template in templates:
         tmpl = j2env.get_template(template)
-        dest = '/etc/httpd/conf.d/{}'.format(template.strip('.j2')
+        dest = '/etc/httpd/conf.d/{}'.format(template.strip('.j2'))
         with open(dest, 'w') as f:
-             f.write(tmpl.render(ctx))
+            f.write(tmpl.render(ctx))
 
 
 def main():
