@@ -69,6 +69,9 @@ def install_configs(ctx):
         with open(dest, 'w') as f:
             f.write(tmpl.render(ctx))
 
+    with open('/etc/httpd/conf.d/servername.conf', 'w') as f:
+        f.write('ServerName {}:443'.format(ctx['SERVER_NAME']))
+
 
 def get_ctx():
     ctx = {
