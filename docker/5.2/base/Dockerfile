@@ -3,7 +3,7 @@ MAINTAINER "Harvard University FAS Research Computing" <rchelp@fas.harvard.edu>
 
 LABEL Description="Base image for CORONA"
 
-RUN yum -y update && yum clean all
+RUN yum clean all && yum -y update
 RUN rpm -e --nodeps systemd-container systemd-container-libs; \
 RUN yum -d 10 -y install \
     systemd \
