@@ -19,8 +19,9 @@ TEMPLATES = [
 ]
 
 CERTS = [
-    ('/etc/pki/tls/certs/xmlrpc_cert.cer', '/etc/pki/tls/private/xmlrpc.key'),
-    ('/etc/pki/tls/certs/web_cert.cer', "/etc/pki/tls/private/web.key"),
+    ('/etc/pki/tls/certs/sunstone.cer', "/etc/pki/tls/private/sunstone.key"),
+    ('/etc/pki/tls/certs/xmlrpc.cer', '/etc/pki/tls/private/xmlrpc.key'),
+    ('/etc/pki/tls/certs/onegate.cer', "/etc/pki/tls/private/onegate.key"),
 ]
 
 

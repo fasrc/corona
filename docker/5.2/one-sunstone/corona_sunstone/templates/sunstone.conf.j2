@@ -24,10 +24,10 @@
 
   ## SSL directives
   SSLEngine on
-  SSLCertificateFile      "/etc/pki/tls/certs/web_cert.cer"
-  SSLCertificateKeyFile   "/etc/pki/tls/private/web.key"
+  SSLCertificateFile      "/etc/pki/tls/certs/sunstone.cer"
+  SSLCertificateKeyFile   "/etc/pki/tls/private/sunstone.key"
   SSLCACertificatePath    "/etc/pki/tls/certs"
-  SSLCACertificateFile    "/etc/pki/tls/certs/intermediate_root_only.cer"
+  SSLCACertificateFile    "/etc/pki/tls/certs/ca-bundle.crt"
 
   ## Custom fragment
 PassengerUser oneadmin
