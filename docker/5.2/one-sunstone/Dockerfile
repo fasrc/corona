@@ -3,7 +3,7 @@ MAINTAINER "Harvard University FAS Research Computing" <rchelp@fas.harvard.edu>
 
 LABEL Description="Sunstone image for CORONA"
 
-RUN yum -y update && yum clean all
+RUN yum clean all && yum -y update
 RUN yum -y install \
     ca-certificates \
     openssl \
@@ -11,8 +11,6 @@ RUN yum -y install \
     mod_passenger \
     python34-pip \
     && yum clean all
-
-RUN pip3 install -U pip setuptools wheel
 
 RUN mkdir -p /usr/src/app
 

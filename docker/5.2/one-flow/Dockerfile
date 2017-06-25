@@ -1,9 +1,9 @@
-FROM fasrc/corona-base:5.2
+FROM fasrc/corona-one-base:5.2
 MAINTAINER "Harvard University FAS Research Computing" <rchelp@fas.harvard.edu>
 
 LABEL Description="OneFlow image for CORONA"
 
-RUN yum -y update && yum clean all
+RUN yum clean all && yum -y update
 RUN yum -y install \
     opennebula-flow \
     && yum clean all

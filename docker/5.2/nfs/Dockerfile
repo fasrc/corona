@@ -3,10 +3,11 @@ MAINTAINER "Harvard University FAS Research Computing" <rchelp@fas.harvard.edu>
 
 LABEL Description="NFS image for CORONA"
 
-RUN yum -y update && yum clean all
+RUN yum clean all && yum -y update
 RUN yum -y install \
     nfs-utils \
-    nfs-utils-lib
+    nfs-utils-lib \
+    && yum clean all
 
 COPY bin/supervisor-exportfs /usr/local/sbin/supervisor-exportfs
 COPY bin/supervisor-rpc.nfsd /usr/local/sbin/supervisor-rpc.nfsd
