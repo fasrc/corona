@@ -8,6 +8,7 @@ RUN yum -y install \
     ca-certificates \
     openssl \
     httpd \
+    mod_ssl \
     mod_passenger \
     python34-pip \
     && yum clean all
