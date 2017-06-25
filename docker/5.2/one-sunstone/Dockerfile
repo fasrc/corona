@@ -10,7 +10,7 @@ RUN yum -y install \
     httpd \
     mod_ssl \
     mod_passenger \
-    python34-pip \
+    python-devel \
     && yum clean all
 
 RUN mkdir -p /usr/src/app
