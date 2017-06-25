@@ -1,62 +1,69 @@
-controller:
-    image: fasrc/corona-controller:${ONE_VERSION:-4.12}
-    net: host
+version: '3'
+
+volumes:
+  controller:
+
+services:
+  controller:
+    image: fasrc/corona-controller:${ONE_VERSION:-5.2}
+    network_mode: host
     pid: host
     restart: always
     volumes:
-     - /opt/corona/${ONE_VERSION:-4.12}/one-controller/ssh_config:/var/lib/one/.ssh/config:ro
+      - controller:/var/lib/one
+      - /opt/corona/${ONE_VERSION:-5.2}/one-controller/ssh_config:/var/lib/one/.ssh/config:ro
     command: /root/start.sh
 
-nfs:
-    image: fasrc/corona-nfs:${ONE_VERSION:-4.12}
-    net: host
+  nfs:
+    image: fasrc/corona-nfs:${ONE_VERSION:-5.2}
+    network_mode: host
     pid: host
     privileged: true
     restart: always
     volumes:
-     - /opt/corona/${ONE_VERSION:-4.12}/nfs/nfs_export:/etc/exports:ro
-    volumes_from:
-     - controller
+      - /opt/corona/${ONE_VERSION:-5.2}/nfs/nfs_export:/etc/exports:ro
+    volumes:
+      - controller:/var/lib/one
     command: /root/start.sh
 
-libvirt:
-    image: fasrc/corona-libvirt:${ONE_VERSION:-4.12}
-    net: host
+  libvirt:
+    image: fasrc/corona-libvirt:${ONE_VERSION:-5.2}
+    network_mode: host
     pid: host
     privileged: true
     restart: always
     volumes:
-     - /run:/run
-     - /sys/fs/cgroup:/sys/fs/cgroup
-     - /dev:/dev
-     - /lib/modules:/lib/modules:ro
-     - /opt/corona/${ONE_VERSION:-4.12}/libvirt/libvirt.conf:/etc/libvirt/libvirt.conf:ro
-     - /opt/corona/${ONE_VERSION:-4.12}/libvirt/libvirtd.conf:/etc/libvirt/libvirtd.conf:ro
-     - /opt/corona/${ONE_VERSION:-4.12}/libvirt/qemu.conf:/etc/libvirt/qemu.conf:ro
-    volumes_from:
-     - controller
+      - /run:/run
+      - /sys/fs/cgroup:/sys/fs/cgroup
+      - /dev:/dev
+      - /lib/modules:/lib/modules:ro
+      - /opt/corona/${ONE_VERSION:-5.2}/libvirt/libvirt.conf:/etc/libvirt/libvirt.conf:ro
+      - /opt/corona/${ONE_VERSION:-5.2}/libvirt/libvirtd.conf:/etc/libvirt/libvirtd.conf:ro
+      - /opt/corona/${ONE_VERSION:-5.2}/libvirt/qemu.conf:/etc/libvirt/qemu.conf:ro
+    volumes:
+      - controller:/var/lib/one
     command: /root/start.sh
 
-hypervisor:
-    image: fasrc/corona-hypervisor:${ONE_VERSION:-4.12}
-    net: host
+  hypervisor:
+    image: fasrc/corona-hypervisor:${ONE_VERSION:-5.2}
+    network_mode: host
     pid: host
     restart: always
     volumes:
-     - /run:/run
-     - /sys/fs/cgroup:/sys/fs/cgroup
-     - /dev:/dev
-     - /opt/corona/${ONE_VERSION:-4.12}/one-hypervisor/sshd.conf:/etc/ssh/sshd_config:ro
-    volumes_from:
-     - controller
+      - /run:/run
+      - /sys/fs/cgroup:/sys/fs/cgroup
+      - /dev:/dev
+      - /opt/corona/${ONE_VERSION:-5.2}/one-hypervisor/sshd.conf:/etc/ssh/sshd_config:ro
+    volumes:
+      - controller:/var/lib/one
     command: /root/start.sh
 
-sunstone:
-    image: fasrc/corona-sunstone:${ONE_VERSION:-4.12}
-    net: host
-    pid: host
-    privileged: true
-    restart: always
-    volumes_from:
-     - controller
-    command: /root/start.sh
+  #sunstone:
+  #  image: fasrc/corona-sunstone:${ONE_VERSION:-5.2}
+  #  network_mode: host
+  #  pid: host
+  #  privileged: true
+  #  restart: always
+  #  volumes:
+  #    - controller:/var/lib/one
+  #  command: /root/start.sh
