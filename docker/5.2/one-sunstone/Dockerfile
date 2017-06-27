@@ -13,7 +13,7 @@ RUN yum -y install \
     python-devel \
     && yum clean all
 
-RUN sed -i 's/^:sessions:.*$/:sessions: memcached/g' /etc/one/sunstone-server.conf
+RUN sed -i 's/^:sessions:.*$/:sessions: memcache/g' /etc/one/sunstone-server.conf
 
 RUN mkdir -p /usr/src/app
 
