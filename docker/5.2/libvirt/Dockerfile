@@ -11,6 +11,7 @@ RUN yum -y install \
     && yum clean all
 
 COPY supervisord/libvirtd.conf /etc/supervisor.d/libvirtd.conf
+COPY supervisord/virtlogd.conf /etc/supervisor.d/virtlogd.conf
 COPY start.sh /root/start.sh
 
 CMD ["/root/start.sh"]
