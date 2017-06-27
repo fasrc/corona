@@ -15,6 +15,12 @@ services:
       - /opt/corona/${ONE_VERSION:-5.2}/one-controller/ssh_config:/var/lib/one/.ssh/config:ro
     command: /root/start.sh
 
+  memcached:
+    image: memcached:latest
+    network_mode: host
+    pid: host
+    restart: always
+
   sunstone:
     image: fasrc/corona-sunstone:${ONE_VERSION:-5.2}
     network_mode: host
@@ -22,6 +28,7 @@ services:
     privileged: true
     restart: always
     depends_on:
+      - memcached
       - controller
     environment:
       SERVER_NAME: ${SERVER_NAME:-localhost}

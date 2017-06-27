@@ -75,6 +75,12 @@ services:
       - controller:/var/lib/one
     command: /root/start.sh
 
+  memcached:
+    image: memcached:latest
+    network_mode: host
+    pid: host
+    restart: always
+
   sunstone:
     image: fasrc/corona-sunstone:${ONE_VERSION:-5.2}
     network_mode: host
@@ -82,6 +88,7 @@ services:
     privileged: true
     restart: always
     depends_on:
+      - memcached
       - controller
     environment:
       SERVER_NAME: ${SERVER_NAME:-localhost}
