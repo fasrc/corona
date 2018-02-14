@@ -1,0 +1,3 @@
+## Configure NFS exports
+
+/var/lib/one/ *(rw,sync,no_subtree_check,root_squash)
