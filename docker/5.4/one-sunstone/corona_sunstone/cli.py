@@ -1,6 +1,7 @@
 import os
 import re
 import sys
+import stat
 import shutil
 import tempfile
 
@@ -89,6 +90,8 @@ def sed_inplace(filename, pattern, repl):
                 tmp_file.write(pattern_compiled.sub(repl, line))
 
     shutil.copystat(filename, tmp_file.name)
+    st = os.stat(filename)
+    os.chown(tmp_file.name, st[stat.ST_UID], st[stat.ST_GID])
     shutil.move(tmp_file.name, filename)
 
 
