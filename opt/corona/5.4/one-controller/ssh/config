@@ -1,4 +1,4 @@
-## Congfigure sshd to remove host checking for oneadmin
+## Configure sshd to remove host checking for oneadmin
 
 Host *
     StrictHostKeyChecking no

@@ -11,8 +11,7 @@ services:
     restart: always
     volumes:
       - controller:/var/lib/one
-      - /opt/corona/${ONE_VERSION:-5.2}/one-controller/id_rsa:/var/lib/one/.ssh/id_rsa:ro
-      - /opt/corona/${ONE_VERSION:-5.2}/one-controller/ssh_config:/var/lib/one/.ssh/config:ro
+      - /opt/corona/${ONE_VERSION:-5.2}/one-controller/ssh:/var/lib/one/.ssh
     command: /root/start.sh
 
   libvirt:
