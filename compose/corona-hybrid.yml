@@ -47,6 +47,8 @@ services:
       - /run:/run
       - /sys/fs/cgroup:/sys/fs/cgroup
       - /dev:/dev
+      - /opt/corona/${ONE_VERSION:-5.2}/libvirt/libvirt.conf:/etc/libvirt/libvirt.conf:ro
+      - /opt/corona/${ONE_VERSION:-5.2}/libvirt/libvirtd.conf:/etc/libvirt/libvirtd.conf:ro
       - /opt/corona/${ONE_VERSION:-5.2}/one-hypervisor/sshd.conf:/etc/ssh/sshd_config:ro
       - /opt/corona/${ONE_VERSION:-5.2}/one-hypervisor/authorized_keys:/var/lib/one/.ssh/authorized_keys:ro
     command: /root/start.sh
