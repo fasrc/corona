@@ -1,5 +1,8 @@
 import os
+import re
 import sys
+import shutil
+import tempfile
 
 import jinja2
 from OpenSSL import crypto
@@ -73,12 +76,37 @@ def install_configs(ctx):
         f.write('ServerName {}:443'.format(ctx['SERVER_NAME']))
 
 
+def sed_inplace(filename, pattern, repl):
+    """
+    Perform the pure-Python equivalent of in-place `sed` substitution: e.g.,
+    `sed -i -e 's/'${pattern}'/'${repl}' "${filename}"`.
+    """
+    pattern_compiled = re.compile(pattern)
+
+    with tempfile.NamedTemporaryFile(mode='w', delete=False) as tmp_file:
+        with open(filename) as src_file:
+            for line in src_file:
+                tmp_file.write(pattern_compiled.sub(repl, line))
+
+    shutil.copystat(filename, tmp_file.name)
+    shutil.move(tmp_file.name, filename)
+
+
+def configure_vnc_wss(ctx):
+    sed_inplace(
+        '/etc/one/sunstone-server.conf',
+        r'^:vnc_proxy_support_wss:.*$',
+        r':vnc_proxy_support_wss: "{}"'.format(ctx['VNC_PROXY_SUPPORT_WSS']),
+    )
+
+
 def get_ctx():
     ctx = {
         'ONEGATE_HOST': 'localhost',
         'ONEGATE_PORT': 5030,
         'ONE_XMLRPC_HOST': 'localhost',
         'ONE_XMLRPC_PORT': 2633,
+        'VNC_PROXY_SUPPORT_WSS': 'yes',
     }
     ctx.update(os.environ)
     missing = '\n'.join([' - {}'.format(r) for r in REQUIRED if r not in ctx])
@@ -92,6 +120,7 @@ def get_ctx():
 
 def main():
     ctx = get_ctx()
+    configure_vnc_wss(ctx)
     install_configs(ctx)
     check_certs(ctx)
     exit(httpd(["-DFOREGROUND"], _fg=True).exit_code)
