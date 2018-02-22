@@ -59,8 +59,15 @@ services:
     restart: always
     depends_on:
       - controller
+      - sunstone
     volumes:
       - controller:/var/lib/one
+      - lock:/var/lock/one
+      - sunstone_certs:/etc/pki/tls:ro
+    environment:
+      - VNC_PROXY_SUPPORT_WSS="yes"
+      - VNC_PROXY_CERT="/etc/pki/tls/certs/sunstone.cer"
+      - VNC_PROXY_KEY="/etc/pki/tls/private/sunstone.key"
     command: /root/start.sh
 
   oneflow:
@@ -104,6 +111,10 @@ services:
       SERVER_NAME: ${SERVER_NAME:-localhost}
     volumes:
       - controller:/var/lib/one
+      - lock:/var/lock/one
+      - sunstone_certs:/etc/pki/tls
 
 volumes:
   controller:
+  lock:
+  sunstone_certs:
