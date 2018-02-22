@@ -108,8 +108,8 @@ services:
       - memcached
       - controller
     environment:
-      - SERVER_NAME="${SERVER_NAME:-localhost}"
-      - VNC_PROXY_SUPPORT_WSS="yes"
+      SERVER_NAME: ${SERVER_NAME:-localhost}
+      VNC_PROXY_SUPPORT_WSS: "yes"
     volumes:
       - controller:/var/lib/one
       - lock:/var/lock/one
