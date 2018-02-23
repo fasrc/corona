@@ -9,6 +9,7 @@ RUN yum -y install \
     qemu-kvm-ev \
     libvirt \
     && yum clean all
+RUN usermod -aG kvm oneadmin
 
 COPY supervisord/libvirtd.conf /etc/supervisor.d/libvirtd.conf
 COPY supervisord/virtlogd.conf /etc/supervisor.d/virtlogd.conf
