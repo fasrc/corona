@@ -5,14 +5,14 @@ volumes:
 
 services:
   controller:
-    image: fasrc/corona-controller:${ONE_VERSION:-5.2}
+    image: fasrc/corona-controller:${ONE_VERSION:-5.4}
     network_mode: host
     pid: host
     restart: always
     volumes:
       - controller:/var/lib/one
-      - /opt/corona/${ONE_VERSION:-5.2}/one-controller/id_rsa:/var/lib/one/.ssh/id_rsa:ro
-      - /opt/corona/${ONE_VERSION:-5.2}/one-controller/ssh_config:/var/lib/one/.ssh/config:ro
+      - /opt/corona/${ONE_VERSION:-5.4}/one-controller/id_rsa:/var/lib/one/.ssh/id_rsa:ro
+      - /opt/corona/${ONE_VERSION:-5.4}/one-controller/ssh_config:/var/lib/one/.ssh/config:ro
     command: /root/start.sh
 
   memcached:
@@ -22,7 +22,7 @@ services:
     restart: always
 
   sunstone:
-    image: fasrc/corona-sunstone:${ONE_VERSION:-5.2}
+    image: fasrc/corona-sunstone:${ONE_VERSION:-5.4}
     network_mode: host
     pid: host
     privileged: true
@@ -36,7 +36,7 @@ services:
       - controller:/var/lib/one
 
   novnc:
-    image: fasrc/corona-novnc:${ONE_VERSION:-5.2}
+    image: fasrc/corona-novnc:${ONE_VERSION:-5.4}
     network_mode: host
     pid: host
     restart: always
@@ -45,7 +45,7 @@ services:
     command: /root/start.sh
 
   oneflow:
-    image: fasrc/corona-oneflow:${ONE_VERSION:-5.2}
+    image: fasrc/corona-oneflow:${ONE_VERSION:-5.4}
     network_mode: host
     pid: host
     restart: always
@@ -54,7 +54,7 @@ services:
     command: /root/start.sh
 
   onegate:
-    image: fasrc/corona-onegate:${ONE_VERSION:-5.2}
+    image: fasrc/corona-onegate:${ONE_VERSION:-5.4}
     network_mode: host
     pid: host
     restart: always

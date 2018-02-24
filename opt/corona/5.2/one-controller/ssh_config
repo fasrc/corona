@@ -1,6 +1,0 @@
-## Congfigure sshd to remove host checking for oneadmin
-
-Host *
-    StrictHostKeyChecking no
-    Port 3960
-    UserKnownHostsFile /dev/null
