@@ -2,7 +2,6 @@
 set -o errexit
 
 su - oneadmin -c '/tmp/one-auth.sh'
-rm /tmp/one-auth.sh
 
 # Start supervisord
 /usr/bin/supervisord
