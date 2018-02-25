@@ -3,6 +3,9 @@ set -o errexit
 
 su - oneadmin -c '/tmp/one-auth.sh'
 
+# Clear stale ONE lock
+rm -f /var/lock/one/one
+
 # Start supervisord
 /usr/bin/supervisord
 
