@@ -14,7 +14,7 @@ RUN rpm -e --nodeps systemd-container systemd-container-libs; \
         python2-pip \
         && yum clean all
 
-RUN pip install -IU pip setuptools wheel
+RUN pip install --no-cache-dir -IU pip setuptools wheel
 
 RUN pip install --no-cache-dir supervisor
 
