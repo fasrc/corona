@@ -12,6 +12,6 @@ RUN yum -y install \
 COPY bin/supervisor-exportfs /usr/local/sbin/supervisor-exportfs
 COPY bin/supervisor-rpc.nfsd /usr/local/sbin/supervisor-rpc.nfsd
 COPY supervisord/nfs_server.conf /etc/supervisor.d/nfs_server.conf
-COPY start.sh /root/start.sh
+COPY nfs.sh /usr/local/corona/bin/nfs.sh
 
-CMD ["/root/start.sh"]
+CMD ["/usr/local/corona/bin/nfs.sh"]
