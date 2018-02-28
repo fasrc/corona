@@ -25,7 +25,7 @@ services:
 
   sshd:
     build: ../docker/${ONE_VERSION:-5.4}/one-sshd
-    image: fasrc/corona-sshd:${ONE_VERSION:-5.4}
+    image: fasrc/corona-one-sshd:${ONE_VERSION:-5.4}
     depends_on:
       - one_base
 
