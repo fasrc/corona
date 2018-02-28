@@ -8,7 +8,6 @@ RUN yum -y install \
     opennebula-flow \
     && yum clean all
 
-COPY supervisord/one-flow.conf /etc/supervisor.d/one-flow.conf
-COPY start.sh /root/start.sh
+COPY oneflow.sh /usr/local/corona/bin/oneflow.sh
 
-CMD ["/root/start.sh"]
+CMD ["/usr/local/corona/bin/oneflow.sh"]
