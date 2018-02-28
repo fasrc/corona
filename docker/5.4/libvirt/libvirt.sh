@@ -31,11 +31,6 @@ function init_kvm() {
 # Check KVM device status and setup KVM group
 init_kvm
 
-# Start supervisord
-/usr/bin/supervisord
+export SUPERVISORD_ORDERD="yes"
 
-# Start supervisor programs
-/usr/bin/supervisorctl start libvirtd
-
-# Tail the logs to keep supervisor writing to stdout
-tail -f /tmp/supervisord.log
+/usr/local/corona/bin/supervisord.sh

@@ -11,8 +11,7 @@ RUN yum -y install \
     && yum clean all
 RUN usermod -aG kvm oneadmin
 
-COPY supervisord/libvirtd.conf /etc/supervisor.d/libvirtd.conf
-COPY supervisord/virtlogd.conf /etc/supervisor.d/virtlogd.conf
-COPY start.sh /root/start.sh
+COPY supervisord/libvirt.conf /etc/supervisor.d/libvirt.conf
+COPY libvirt.sh /usr/local/corona/bin/libvirt.sh
 
-CMD ["/root/start.sh"]
+CMD ["/usr/local/corona/bin/libvirt.sh"]
