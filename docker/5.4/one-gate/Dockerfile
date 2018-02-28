@@ -8,7 +8,6 @@ RUN yum -y install \
     opennebula-gate \
     && yum clean all
 
-COPY supervisord/one-gate.conf /etc/supervisor.d/one-gate.conf
-COPY start.sh /root/start.sh
+COPY onegate.sh /usr/local/corona/bin/onegate.sh
 
-CMD ["/root/start.sh"]
+CMD ["/usr/local/corona/bin/onegate.sh"]
