@@ -10,11 +10,6 @@ sed -i "s%^:vnc_proxy_support_wss:.*$%:vnc_proxy_support_wss: ${VNC_PROXY_SUPPOR
 sed -i "s%^:vnc_proxy_cert:.*$%:vnc_proxy_cert: ${VNC_PROXY_CERT}%g" /etc/one/sunstone-server.conf
 sed -i "s%^:vnc_proxy_key:.*$%:vnc_proxy_key: ${VNC_PROXY_KEY}%g" /etc/one/sunstone-server.conf
 
-# Start supervisord
-/usr/bin/supervisord
+/usr/bin/novnc-server start
 
-# Start supervisor programs
-/usr/bin/supervisorctl start one-novnc
-
-# Tail the logs to keep supervisor writing to stdout
-tail -f /tmp/supervisord.log
+tail --pid $(</var/lock/one/.novnc.lock) -f /var/log/one/novnc.log
