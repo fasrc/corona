@@ -14,7 +14,6 @@ services:
     volumes:
       - oneadmin_home:/var/lib/one
       - /opt/corona/${ONE_VERSION:-5.4}/one-controller/ssh:/var/lib/one/.ssh
-    command: /root/start.sh
 
   libvirt:
     image: fasrc/corona-libvirt:${ONE_VERSION:-5.4}
@@ -33,7 +32,6 @@ services:
       - /opt/corona/${ONE_VERSION:-5.4}/libvirt/libvirt.conf:/etc/libvirt/libvirt.conf:ro
       - /opt/corona/${ONE_VERSION:-5.4}/libvirt/libvirtd.conf:/etc/libvirt/libvirtd.conf:ro
       - /opt/corona/${ONE_VERSION:-5.4}/libvirt/qemu.conf:/etc/libvirt/qemu.conf:ro
-    command: /root/start.sh
 
   hypervisor:
     image: fasrc/corona-hypervisor:${ONE_VERSION:-5.4}
@@ -52,7 +50,6 @@ services:
       - /opt/corona/${ONE_VERSION:-5.4}/libvirt/libvirt.conf:/etc/libvirt/libvirt.conf:ro
       - /opt/corona/${ONE_VERSION:-5.4}/libvirt/libvirtd.conf:/etc/libvirt/libvirtd.conf:ro
       - /opt/corona/${ONE_VERSION:-5.4}/one-hypervisor/sshd.conf:/etc/ssh/sshd_config:ro
-    command: /root/start.sh
 
   novnc:
     image: fasrc/corona-novnc:${ONE_VERSION:-5.4}
@@ -70,7 +67,6 @@ services:
       - VNC_PROXY_SUPPORT_WSS="yes"
       - VNC_PROXY_CERT="/etc/pki/tls/certs/sunstone.cer"
       - VNC_PROXY_KEY="/etc/pki/tls/private/sunstone.key"
-    command: /root/start.sh
 
   oneflow:
     image: fasrc/corona-oneflow:${ONE_VERSION:-5.4}
@@ -81,7 +77,6 @@ services:
       - controller
     volumes:
       - oneadmin_home:/var/lib/one
-    command: /root/start.sh
 
   onegate:
     image: fasrc/corona-onegate:${ONE_VERSION:-5.4}
@@ -92,7 +87,6 @@ services:
       - controller
     volumes:
       - oneadmin_home:/var/lib/one
-    command: /root/start.sh
 
   memcached:
     image: memcached:latest
