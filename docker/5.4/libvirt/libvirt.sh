@@ -31,6 +31,6 @@ function init_kvm() {
 # Check KVM device status and setup KVM group
 init_kvm
 
-export SUPERVISORD_ORDERD="yes"
+export SUPERVISORD_ORDERED="yes"
 
 /usr/local/corona/bin/supervisord.sh
