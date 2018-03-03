@@ -10,6 +10,6 @@ sed -i "s%^:vnc_proxy_support_wss:.*$%:vnc_proxy_support_wss: ${VNC_PROXY_SUPPOR
 sed -i "s%^:vnc_proxy_cert:.*$%:vnc_proxy_cert: ${VNC_PROXY_CERT}%g" /etc/one/sunstone-server.conf
 sed -i "s%^:vnc_proxy_key:.*$%:vnc_proxy_key: ${VNC_PROXY_KEY}%g" /etc/one/sunstone-server.conf
 
-/usr/bin/novnc-server start
+su oneadmin -c "/usr/bin/novnc-server start"
 
 tail --pid $(</var/lock/one/.novnc.lock) -f /var/log/one/novnc.log
