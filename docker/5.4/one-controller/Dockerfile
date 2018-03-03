@@ -17,4 +17,4 @@ COPY supervisord/one-controller.conf /etc/supervisor.d/one-controller.conf
 COPY one-auth.sh /usr/local/corona/bin/one-auth.sh
 COPY controller.sh /usr/local/corona/bin/controller.sh
 
-CMD ["/root/start.sh"]
+CMD ["/usr/local/corona/bin/controller.sh"]
