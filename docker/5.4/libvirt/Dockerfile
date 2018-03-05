@@ -10,6 +10,7 @@ RUN yum -y install \
     libvirt \
     && yum clean all
 RUN usermod -aG kvm oneadmin
+RUN rm -f /etc/libvirt/qemu/networks/default.xml /etc/libvirt/qemu/networks/autostart/default.xml
 
 COPY supervisord/libvirt.conf /etc/supervisor.d/libvirt.conf
 COPY libvirt.sh /usr/local/corona/bin/libvirt.sh
