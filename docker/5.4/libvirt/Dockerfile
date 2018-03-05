@@ -8,6 +8,7 @@ RUN yum install -y centos-release-qemu-ev
 RUN yum -y install \
     qemu-kvm-ev \
     libvirt \
+    pm-utils \
     && yum clean all
 RUN usermod -aG kvm oneadmin
 RUN rm -f /etc/libvirt/qemu/networks/default.xml /etc/libvirt/qemu/networks/autostart/default.xml
