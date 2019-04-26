@@ -3,8 +3,8 @@
 # Managed by Puppet
 # ************************************
 
-<VirtualHost {{ SERVER_NAME }}:2633>
-  ServerName {{ SERVER_NAME }}-xmlrpc-proxy
+<VirtualHost *:{{ ONE_XMLRPC_PORT }}>
+  ServerName {{ SERVER_NAME }}:{{ ONE_XMLRPC_PORT }}
 
   ## Vhost docroot
   DocumentRoot "/var/www/html/"

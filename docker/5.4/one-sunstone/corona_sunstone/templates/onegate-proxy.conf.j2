@@ -3,8 +3,8 @@
 # Managed by Puppet
 # ************************************
 
-<VirtualHost {{ SERVER_NAME }}:{{ ONEGATE_PORT }}>
-  ServerName {{ SERVER_NAME }}-onegate-proxy
+<VirtualHost *:{{ ONEGATE_PORT }}>
+  ServerName {{ SERVER_NAME }}:{{ ONEGATE_PORT }}
 
   ## Vhost docroot
   DocumentRoot "/var/www/html/"

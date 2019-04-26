@@ -1,5 +1,5 @@
-<VirtualHost {{ SERVER_NAME }}:80>
-  ServerName {{ SERVER_NAME }}-80to443
+<VirtualHost *:80>
+  ServerName {{ SERVER_NAME }}:80
 
   ## Vhost docroot
   DocumentRoot "/var/www/html"

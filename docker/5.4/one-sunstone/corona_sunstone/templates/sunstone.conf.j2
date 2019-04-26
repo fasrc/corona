@@ -3,8 +3,8 @@
 # Managed by Puppet
 # ************************************
 
-<VirtualHost {{ SERVER_NAME }}:443>
-  ServerName {{ SERVER_NAME }}
+<VirtualHost *:443>
+  ServerName {{ SERVER_NAME }}:443
 
   ## Vhost docroot
   DocumentRoot "/usr/lib/one/sunstone/public/"
@@ -12,9 +12,10 @@
   ## Directories, there should at least be a declaration for /usr/lib/one/sunstone/public/
 
   <Directory "/usr/lib/one/sunstone/public/">
+    AllowOverride all
     Options -MultiViews
-    AllowOverride None
     Require all granted
+    Options FollowSymLinks
   </Directory>
 
   ## Logging
