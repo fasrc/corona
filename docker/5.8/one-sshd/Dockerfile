@@ -1,4 +1,4 @@
-FROM fasrc/corona-one-base:5.4
+FROM fasrc/corona-one-base:5.8
 MAINTAINER "Harvard University FAS Research Computing" <rchelp@fas.harvard.edu>
 
 LABEL Description="SSH image for CORONA"

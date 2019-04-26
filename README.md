@@ -50,7 +50,7 @@ $ sudo ln -s $HOME/repos/corona/opt /opt/corona
 Configure `$SERVER_NAME` and `$ONE_VERSION` environment variables:
 
 ```
-$ export ONE_VERSION="5.4"
+$ export ONE_VERSION="5.8"
 $ export SERVER_NAME=$(hostname)
 ```
 
