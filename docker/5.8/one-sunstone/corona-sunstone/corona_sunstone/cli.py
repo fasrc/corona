@@ -92,7 +92,7 @@ def sed_inplace(filename, pattern, repl):
     shutil.move(tmp_file.name, filename)
 
 
-def configure_vnc_wss(ctx):
+def configure_sunstone(ctx):
     sed_inplace(
         '/etc/one/sunstone-server.conf',
         r'^:vnc_proxy_support_wss:.*$',
@@ -103,6 +103,12 @@ def configure_vnc_wss(ctx):
         '/etc/one/sunstone-server.conf',
         r'^:sessions:.*$',
         r':sessions: "{}"'.format(ctx['SUNSTONE_SESSIONS']),
+    )
+
+    sed_inplace(
+        '/etc/one/sunstone-server.conf',
+        r'^\s+- vcenter$',
+        r'#    - vcenter',
     )
 
 
@@ -127,7 +133,7 @@ def get_ctx():
 
 def main():
     ctx = get_ctx()
-    configure_vnc_wss(ctx)
     install_configs(ctx)
     check_certs(ctx)
+    configure_sunstone(ctx)
     exit(httpd(["-DFOREGROUND"], _fg=True).exit_code)
