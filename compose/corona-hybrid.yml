@@ -1,7 +1,9 @@
 version: '3'
 
 volumes:
-  oneadmin_home:
+  one_auth:
+  controller_one:
+  sunstone_one:
   sunstone_locks:
   sunstone_certs:
 
@@ -12,7 +14,8 @@ services:
     pid: host
     restart: always
     volumes:
-      - oneadmin_home:/var/lib/one
+      - controller_one:/var/lib/one
+      - one_auth:/var/lib/one/.one
       - /opt/corona/${ONE_VERSION:-5.8}/one-controller/ssh:/var/lib/one/.ssh
 
   libvirt:
@@ -24,7 +27,7 @@ services:
     depends_on:
       - controller
     volumes:
-      - oneadmin_home:/var/lib/one
+      - one_auth:/var/lib/one/.one
       - /run:/run
       - /sys/fs/cgroup:/sys/fs/cgroup
       - /dev:/dev
@@ -42,7 +45,7 @@ services:
       - libvirt
       - controller
     volumes:
-      - oneadmin_home:/var/lib/one
+      - one_auth:/var/lib/one/.one
       - /opt/corona/${ONE_VERSION:-5.8}/one-controller/ssh:/var/lib/one/.ssh
       - /run:/run
       - /sys/fs/cgroup:/sys/fs/cgroup
@@ -60,7 +63,8 @@ services:
       - controller
       - sunstone
     volumes:
-      - oneadmin_home:/var/lib/one
+      - sunstone_one:/var/lib/one
+      - one_auth:/var/lib/one/.one
       - sunstone_locks:/var/lock/one
       - sunstone_certs:/etc/pki/tls:ro
     environment:
@@ -76,7 +80,7 @@ services:
     depends_on:
       - controller
     volumes:
-      - oneadmin_home:/var/lib/one
+      - one_auth:/var/lib/one/.one
 
   onegate:
     image: fasrc/corona-onegate:${ONE_VERSION:-5.8}
@@ -86,7 +90,7 @@ services:
     depends_on:
       - controller
     volumes:
-      - oneadmin_home:/var/lib/one
+      - one_auth:/var/lib/one/.one
 
   memcached:
     image: memcached:latest
@@ -107,6 +111,7 @@ services:
       SERVER_NAME: ${SERVER_NAME:-localhost}
       VNC_PROXY_SUPPORT_WSS: "yes"
     volumes:
-      - oneadmin_home:/var/lib/one
+      - sunstone_one:/var/lib/one
+      - one_auth:/var/lib/one/.one
       - sunstone_locks:/var/lock/one
       - sunstone_certs:/etc/pki/tls

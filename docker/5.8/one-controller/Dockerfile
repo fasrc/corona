@@ -11,8 +11,6 @@ RUN yum -y install \
 RUN rm /var/lib/one/.one/one_auth ;\
     rm /var/lib/one/.ssh/*
 
-VOLUME /var/lib/one
-
 COPY supervisord/one-controller.conf /etc/supervisor.d/one-controller.conf
 COPY one-auth.sh /usr/local/corona/bin/one-auth.sh
 COPY controller.sh /usr/local/corona/bin/controller.sh
