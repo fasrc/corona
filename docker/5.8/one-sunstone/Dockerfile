@@ -19,6 +19,8 @@ RUN pip install --no-cache-dir -r /usr/src/corona-sunstone/requirements.txt
 
 RUN pip install --no-cache-dir -e /usr/src/corona-sunstone
 
+RUN usermod -a -G oneadmin apache
+
 EXPOSE 80 443
 
 CMD ["/usr/bin/corona-sunstone"]
