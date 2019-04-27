@@ -99,6 +99,12 @@ def configure_vnc_wss(ctx):
         r':vnc_proxy_support_wss: "{}"'.format(ctx['VNC_PROXY_SUPPORT_WSS']),
     )
 
+    sed_inplace(
+        '/etc/one/sunstone-server.conf',
+        r'^:sessions:.*$',
+        r':sessions: "{}"'.format(ctx['SUNSTONE_SESSIONS']),
+    )
+
 
 def get_ctx():
     ctx = {
@@ -107,6 +113,7 @@ def get_ctx():
         'ONE_XMLRPC_HOST': 'localhost',
         'ONE_XMLRPC_PORT': 2633,
         'VNC_PROXY_SUPPORT_WSS': 'yes',
+        'SUNSTONE_SESSIONS': 'memcache',
     }
     ctx.update(os.environ)
     missing = '\n'.join([' - {}'.format(r) for r in REQUIRED if r not in ctx])

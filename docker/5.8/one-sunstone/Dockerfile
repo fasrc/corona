@@ -13,8 +13,6 @@ RUN yum -y install \
     python-devel \
     && yum clean all
 
-RUN sed -i 's/^:sessions:.*$/:sessions: memcache/g' /etc/one/sunstone-server.conf
-
 COPY corona-sunstone /usr/src/corona-sunstone
 
 RUN pip install --no-cache-dir -r /usr/src/corona-sunstone/requirements.txt
