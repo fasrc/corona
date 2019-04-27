@@ -15,15 +15,11 @@ RUN yum -y install \
 
 RUN sed -i 's/^:sessions:.*$/:sessions: memcache/g' /etc/one/sunstone-server.conf
 
-RUN mkdir -p /usr/src/app
+COPY corona-sunstone /usr/src/corona-sunstone
 
-COPY requirements.txt /usr/src/app/
+RUN pip install --no-cache-dir -r /usr/src/corona-sunstone/requirements.txt
 
-RUN pip install --no-cache-dir -r /usr/src/app/requirements.txt
-
-COPY . /usr/src/app
-
-RUN pip install --no-cache-dir -e /usr/src/app/
+RUN pip install --no-cache-dir -e /usr/src/corona-sunstone
 
 EXPOSE 80 443
 
