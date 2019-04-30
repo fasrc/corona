@@ -5,12 +5,6 @@ services:
     build: ../docker/${ONE_VERSION:-5.8}/base
     image: fasrc/corona-base:${ONE_VERSION:-5.8}
 
-  nfs:
-    build: ../docker/${ONE_VERSION:-5.8}/nfs
-    image: fasrc/corona-nfs:${ONE_VERSION:-5.8}
-    depends_on:
-      - base
-
   libvirt:
     build: ../docker/${ONE_VERSION:-5.8}/libvirt
     image: fasrc/corona-libvirt:${ONE_VERSION:-5.8}
