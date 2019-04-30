@@ -4,6 +4,7 @@ volumes:
   one_auth:
   controller_one:
   sunstone_one:
+  hypervisor_one:
   sunstone_locks:
   sunstone_certs:
 
@@ -17,42 +18,6 @@ services:
       - controller_one:/var/lib/one
       - one_auth:/var/lib/one/.one
       - /opt/corona/${ONE_VERSION:-5.8}/one-controller/ssh:/var/lib/one/.ssh
-
-  libvirt:
-    image: fasrc/corona-libvirt:${ONE_VERSION:-5.8}
-    network_mode: host
-    pid: host
-    privileged: true
-    restart: always
-    depends_on:
-      - controller
-    volumes:
-      - one_auth:/var/lib/one/.one
-      - /run:/run
-      - /sys/fs/cgroup:/sys/fs/cgroup
-      - /dev:/dev
-      - /lib/modules:/lib/modules:ro
-      - /opt/corona/${ONE_VERSION:-5.8}/libvirt/libvirt.conf:/etc/libvirt/libvirt.conf:ro
-      - /opt/corona/${ONE_VERSION:-5.8}/libvirt/libvirtd.conf:/etc/libvirt/libvirtd.conf:ro
-      - /opt/corona/${ONE_VERSION:-5.8}/libvirt/qemu.conf:/etc/libvirt/qemu.conf:ro
-
-  hypervisor:
-    image: fasrc/corona-hypervisor:${ONE_VERSION:-5.8}
-    network_mode: host
-    pid: host
-    restart: always
-    depends_on:
-      - libvirt
-      - controller
-    volumes:
-      - one_auth:/var/lib/one/.one
-      - /opt/corona/${ONE_VERSION:-5.8}/one-controller/ssh:/var/lib/one/.ssh
-      - /run:/run
-      - /sys/fs/cgroup:/sys/fs/cgroup
-      - /dev:/dev
-      - /opt/corona/${ONE_VERSION:-5.8}/libvirt/libvirt.conf:/etc/libvirt/libvirt.conf:ro
-      - /opt/corona/${ONE_VERSION:-5.8}/libvirt/libvirtd.conf:/etc/libvirt/libvirtd.conf:ro
-      - /opt/corona/${ONE_VERSION:-5.8}/one-hypervisor/sshd.conf:/etc/ssh/sshd_config:ro
 
   novnc:
     image: fasrc/corona-novnc:${ONE_VERSION:-5.8}
@@ -115,3 +80,41 @@ services:
       - one_auth:/var/lib/one/.one
       - sunstone_locks:/var/lock/one
       - sunstone_certs:/etc/pki/tls
+
+  hypervisor:
+    image: fasrc/corona-hypervisor:${ONE_VERSION:-5.8}
+    network_mode: host
+    pid: host
+    restart: always
+    depends_on:
+      - controller
+    volumes:
+      - hypervisor_one:/var/lib/one
+      - one_auth:/var/lib/one/.one
+      - /opt/corona/${ONE_VERSION:-5.8}/one-controller/ssh:/var/lib/one/.ssh
+      - /run:/run
+      - /sys/fs/cgroup:/sys/fs/cgroup
+      - /dev:/dev
+      - /opt/corona/${ONE_VERSION:-5.8}/libvirt/libvirt.conf:/etc/libvirt/libvirt.conf:ro
+      - /opt/corona/${ONE_VERSION:-5.8}/libvirt/libvirtd.conf:/etc/libvirt/libvirtd.conf:ro
+      - /opt/corona/${ONE_VERSION:-5.8}/one-hypervisor/sshd.conf:/etc/ssh/sshd_config:ro
+
+  libvirt:
+    image: fasrc/corona-libvirt:${ONE_VERSION:-5.8}
+    network_mode: host
+    pid: host
+    privileged: true
+    restart: always
+    depends_on:
+      - controller
+      - hypervisor
+    volumes:
+      - hypervisor_one:/var/lib/one
+      - one_auth:/var/lib/one/.one
+      - /run:/run
+      - /sys/fs/cgroup:/sys/fs/cgroup
+      - /dev:/dev
+      - /lib/modules:/lib/modules:ro
+      - /opt/corona/${ONE_VERSION:-5.8}/libvirt/libvirt.conf:/etc/libvirt/libvirt.conf:ro
+      - /opt/corona/${ONE_VERSION:-5.8}/libvirt/libvirtd.conf:/etc/libvirt/libvirtd.conf:ro
+      - /opt/corona/${ONE_VERSION:-5.8}/libvirt/qemu.conf:/etc/libvirt/qemu.conf:ro
