@@ -2,4 +2,5 @@
 name=opennebula
 baseurl=http://downloads.opennebula.org/repo/5.8/CentOS/7/x86_64
 enabled=1
-gpgcheck=0
+gpgcheck=1
+gpgkey=http://downloads.opennebula.org/repo/repo.key

@@ -3,8 +3,6 @@ MAINTAINER "Harvard University FAS Research Computing" <rchelp@fas.harvard.edu>
 
 LABEL Description="Base ONE image for CORONA"
 
-COPY one-centos7.repo /etc/yum.repos.d/
-
 RUN yum clean all && yum -y update
 
 # Install base OpenNebula requirements

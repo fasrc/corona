@@ -3,6 +3,9 @@ MAINTAINER "Harvard University FAS Research Computing" <rchelp@fas.harvard.edu>
 
 LABEL Description="Base image for CORONA"
 
+COPY opennebula.repo /etc/yum.repos.d/
+COPY ceph.repo /etc/yum.repos.d/
+
 RUN yum clean all && yum -y install epel-release
 RUN yum clean all && yum -y update
 RUN rpm -e --nodeps systemd-container systemd-container-libs; \
