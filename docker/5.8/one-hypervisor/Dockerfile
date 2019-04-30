@@ -5,6 +5,7 @@ LABEL Description="Hypervisor image for CORONA"
 
 RUN yum clean all && yum -y update
 RUN yum -y install \
+    ceph-common \
     opennebula-node-kvm \
     && yum clean all
 

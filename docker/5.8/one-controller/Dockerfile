@@ -5,6 +5,7 @@ LABEL Description="Controller image for CORONA"
 
 RUN yum clean all && yum -y update
 RUN yum -y install \
+    ceph-common \
     opennebula-server \
     && yum clean all
 

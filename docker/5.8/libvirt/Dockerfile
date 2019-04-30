@@ -6,6 +6,7 @@ LABEL Description="libvirt image for CORONA"
 RUN yum clean all && yum -y update
 RUN yum install -y centos-release-qemu-ev
 RUN yum -y install \
+    ceph-common \
     qemu-kvm-ev \
     libvirt \
     pm-utils \
