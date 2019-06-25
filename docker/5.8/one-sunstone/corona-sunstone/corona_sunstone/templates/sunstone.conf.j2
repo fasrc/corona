@@ -1,0 +1,35 @@
+# ************************************
+# Vhost template in module puppetlabs-apache
+# Managed by Puppet
+# ************************************
+
+<VirtualHost *:443>
+  ServerName {{ SERVER_NAME }}:443
+
+  ## Vhost docroot
+  DocumentRoot "/usr/lib/one/sunstone/public/"
+
+  ## Directories, there should at least be a declaration for /usr/lib/one/sunstone/public/
+
+  <Directory "/usr/lib/one/sunstone/public/">
+    AllowOverride all
+    Options -MultiViews
+    Require all granted
+    Options FollowSymLinks
+  </Directory>
+
+  ## Logging
+  ErrorLog "/var/log/httpd/sunstone_error_ssl.log"
+  ServerSignature Off
+  CustomLog "/var/log/httpd/sunstone_access_ssl.log" combined
+
+  ## SSL directives
+  SSLEngine on
+  SSLCertificateFile      "/etc/pki/tls/certs/sunstone.cer"
+  SSLCertificateKeyFile   "/etc/pki/tls/private/sunstone.key"
+  SSLCACertificatePath    "/etc/pki/tls/certs"
+  SSLCACertificateFile    "/etc/pki/tls/certs/ca-bundle.crt"
+
+  ## Custom fragment
+PassengerUser oneadmin
+</VirtualHost>

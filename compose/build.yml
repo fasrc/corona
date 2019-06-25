@@ -1,0 +1,66 @@
+version: '3'
+
+services:
+  base:
+    build: ../docker/${ONE_VERSION:-5.8}/base
+    image: fasrc/corona-base:${ONE_VERSION:-5.8}
+
+  libvirt:
+    build: ../docker/${ONE_VERSION:-5.8}/libvirt
+    image: fasrc/corona-libvirt:${ONE_VERSION:-5.8}
+    depends_on:
+      - base
+
+  one_base:
+    build: ../docker/${ONE_VERSION:-5.8}/one-base
+    image: fasrc/corona-one-base:${ONE_VERSION:-5.8}
+    depends_on:
+      - base
+
+  sshd:
+    build: ../docker/${ONE_VERSION:-5.8}/one-sshd
+    image: fasrc/corona-one-sshd:${ONE_VERSION:-5.8}
+    depends_on:
+      - one_base
+
+  controller:
+    build: ../docker/${ONE_VERSION:-5.8}/one-controller
+    image: fasrc/corona-controller:${ONE_VERSION:-5.8}
+    depends_on:
+      - one_base
+
+  hypervisor:
+    build: ../docker/${ONE_VERSION:-5.8}/one-hypervisor
+    image: fasrc/corona-hypervisor:${ONE_VERSION:-5.8}
+    depends_on:
+      - sshd
+
+  oneflow:
+    build: ../docker/${ONE_VERSION:-5.8}/one-flow
+    image: fasrc/corona-oneflow:${ONE_VERSION:-5.8}
+    depends_on:
+      - one_base
+
+  onegate:
+    build: ../docker/${ONE_VERSION:-5.8}/one-gate
+    image: fasrc/corona-onegate:${ONE_VERSION:-5.8}
+    depends_on:
+      - one_base
+
+  sunstone_base:
+    build: ../docker/${ONE_VERSION:-5.8}/one-sunstone-base
+    image: fasrc/corona-sunstone-base:${ONE_VERSION:-5.8}
+    depends_on:
+      - one_base
+
+  sunstone:
+    build: ../docker/${ONE_VERSION:-5.8}/one-sunstone
+    image: fasrc/corona-sunstone:${ONE_VERSION:-5.8}
+    depends_on:
+      - sunstone_base
+
+  novnc:
+    build: ../docker/${ONE_VERSION:-5.8}/one-novnc
+    image: fasrc/corona-novnc:${ONE_VERSION:-5.8}
+    depends_on:
+      - sunstone_base

@@ -1,0 +1,20 @@
+FROM fasrc/corona-base:5.8
+MAINTAINER "Harvard University FAS Research Computing" <rchelp@fas.harvard.edu>
+
+LABEL Description="libvirt image for CORONA"
+
+RUN yum clean all && yum -y update
+RUN yum install -y centos-release-qemu-ev
+RUN yum -y install \
+    ceph-common \
+    qemu-kvm-ev \
+    libvirt \
+    pm-utils \
+    && yum clean all
+RUN usermod -aG kvm oneadmin
+RUN rm -f /etc/libvirt/qemu/networks/default.xml /etc/libvirt/qemu/networks/autostart/default.xml
+
+COPY supervisord/libvirt.conf /etc/supervisor.d/libvirt.conf
+COPY libvirt.sh /usr/local/corona/bin/libvirt.sh
+
+CMD ["/usr/local/corona/bin/libvirt.sh"]
